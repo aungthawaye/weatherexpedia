@@ -33,7 +33,7 @@ public class WundergroundWeatherService implements WeatherService
     @Autowired
     private WeatherReportParser weatherReportParser;  
     
-    public void setParser(WeatherReportParser parser)
+    public void setWeatherReportParser(WeatherReportParser parser)
     {
         LOG.debug("Injected dependency : " + parser.getClass().getName());
         this.weatherReportParser = parser;
