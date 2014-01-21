@@ -1,6 +1,7 @@
 package com.weatherexpedia.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.weatherexpedia.component.WeatherService;
-import com.weatherexpedia.component.ZipcodeValidator;
+import com.weatherexpedia.component.util.ZipcodeValidator;
+import com.weatherexpedia.component.weather.service.WeatherService;
 import com.weatherexpedia.config.Configurator;
 import com.weatherexpedia.http.response.WeatherReportResponse;
 
@@ -28,6 +29,15 @@ public class WeatherExpediaController
 {
     private final static Logger LOG = Logger.getLogger(WeatherExpediaController.class);
     
+    
+    @Autowired
+    private WeatherService weatherService;
+    
+    public void setWeatherService(WeatherService ws)
+    {
+        LOG.debug("Controller Injected Dependency : " + ws.getClass().getName());
+        this.weatherService = ws;
+    }
     
     /*
      * This method is just to redirect the user to weatherexpedia home page. 
@@ -57,9 +67,9 @@ public class WeatherExpediaController
             response.setStatus("F");
             return response;
         }
-        
-        WeatherService ws = new WeatherService();
-        WeatherReportResponse response = ws.getWeatherCondition(zip); 
+                
+        LOG.debug("Autowired WS : " + this.weatherService.getClass().getName());
+        WeatherReportResponse response = this.weatherService.getWeatherCondition(zip); 
         return response;
     }
 }

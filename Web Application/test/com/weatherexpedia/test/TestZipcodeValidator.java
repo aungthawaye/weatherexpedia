@@ -2,7 +2,7 @@ package com.weatherexpedia.test;
 
 import org.apache.log4j.Logger;
 
-import com.weatherexpedia.component.ZipcodeValidator;
+import com.weatherexpedia.component.util.ZipcodeValidator;
 
 public class TestZipcodeValidator
 {

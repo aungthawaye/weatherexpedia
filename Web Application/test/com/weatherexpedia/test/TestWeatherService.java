@@ -2,7 +2,8 @@ package com.weatherexpedia.test;
 
 import org.apache.log4j.Logger;
 
-import com.weatherexpedia.component.WeatherService;
+import com.weatherexpedia.component.weather.parser.impl.WundergroundWeatherReportParser;
+import com.weatherexpedia.component.weather.service.impl.WundergroundWeatherService;
 import com.weatherexpedia.http.response.WeatherReportResponse;
 
 public class TestWeatherService
@@ -18,7 +19,8 @@ public class TestWeatherService
     
     public static void testWeatherCondition(String zip)
     {
-        WeatherService ws = new WeatherService();
+        WundergroundWeatherService ws = new WundergroundWeatherService();
+        ws.setParser(new WundergroundWeatherReportParser());
         WeatherReportResponse response = ws.getWeatherCondition(zip);
         LOG.debug("****************************************************************");
         LOG.debug("\tTesting with Input : '" + zip + "'");
