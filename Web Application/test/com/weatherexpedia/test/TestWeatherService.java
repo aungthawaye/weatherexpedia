@@ -20,7 +20,7 @@ public class TestWeatherService
     public static void testWeatherCondition(String zip)
     {
         WundergroundWeatherService ws = new WundergroundWeatherService();
-        ws.setParser(new WundergroundWeatherReportParser());
+        ws.setWeatherReportParser(new WundergroundWeatherReportParser());
         WeatherReportResponse response = ws.getWeatherCondition(zip);
         LOG.debug("****************************************************************");
         LOG.debug("\tTesting with Input : '" + zip + "'");
